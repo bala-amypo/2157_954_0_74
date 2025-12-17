@@ -6,20 +6,29 @@ import com.example.demo.entity.Studentity;
 import com.example.demo.services.Studservice;
 @RestController
 @RequestMapping("/student")
-public class Studctl{
-    @@Autowiredprivate Studservice ser;
+public class Studctl {
+    @Autowired
+    private Studservice ser;
+
+    //POST
     @PoastMapping("/add")
-    public Studentity addStudentity(@RequestBody Studentity st){
+    public Studentity addStudent(@RequestBody Studentity st){
         return ser.saveData(st);
     }
-    @GetMapping(/"getall")
-    public Collection<Studentity> getAllStudent(){
+
+    //GET ALL
+    @GetMapping("/getall")
+    public Collection<Studentity> getAllStudents(){
         return ser.getAll();
     }
+
+    //GEF BY ID
     @GetMapping("/get/{id}")
-    public Studentity getStudentByid(@PathVariable int id){
-        return ser.getByid(id);
+    public Studentity getStudentById(@PathVariable int id){
+        return ser.getById(id);
     }
+
+    //PUT (UPDATE)
     @PutMapping("/update/{id}")
     public Studentity updateStudent(
         @PathVariable int id,
