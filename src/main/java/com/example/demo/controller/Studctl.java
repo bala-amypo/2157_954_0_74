@@ -32,7 +32,7 @@ public class Studctl {
     @PutMapping("/update/{id}")
     public Studentity updateStudent(
         @PathVariable int id,
-        @RequestBody Studentity st{
+        @RequestBody Studentity st){
             return ser.update(id,st);
         }
     
