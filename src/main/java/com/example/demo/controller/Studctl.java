@@ -33,7 +33,7 @@ public class Studctl {
     public Studentity updateStudent(
         @PathVariable int id,
         @RequestBody Studentity st{
-            return ser.update(id,sr);
+            return ser.update(id,st);
         }
     
     }
