@@ -3,8 +3,8 @@ import java.util.*;
 import org.springframework.stereotype.Service;
 import com.example.demo.entity.Student;
 @Service
-public class StudentServiceimpl
- implements StudentService{
+public class Studentserviceimpl
+ implements Studentservice{
     private final Map<Long,Student>
     store=new HashMap<>();
     private long counter=1;
@@ -21,10 +21,13 @@ public class StudentServiceimpl
         return new
     ArrayList<>(store.values());
     }
-    @Overridepublic Optional<Student>getOneStudent(Long id){
-        return Optional.ofNullable(store.get(id));
+    @Override
+    public Optional<Student>getOneStudent(Long id){
+        return
+    Optional.ofNullable(store.get(id));
     }
-    @Overridepublic void deleteStudent(Long id){
+    @Override
+    public void deleteStudent(Long id){
         store.remove(id);
     
     }
