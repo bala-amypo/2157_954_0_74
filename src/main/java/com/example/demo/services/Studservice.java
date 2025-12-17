@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import org.springframework.stereotype.Service;
 import com.example.demo.entity.Studentity;
-@Servicepublic class Studservice{
+@Service
+public class Studservice{
     private Map<Integer,Studentity>details=new HashMap<>();
     //POST -Add student
     public Studentity saveData(Studentity st){
