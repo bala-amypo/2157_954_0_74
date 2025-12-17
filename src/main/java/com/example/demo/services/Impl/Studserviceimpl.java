@@ -13,6 +13,15 @@ public class StudentServiceimpl implements StudentService{
         store.put(st.getId(),st);
         retrun st;
     }
+    @Overridepublic List<Student>
+    getAllStudents(){
+        return new ArrayList<>(store.values());
+    }
+    @Overridepublic Optional<Student>getOneStudent(Long id){
+        return Optional.ofNullable(store.get(id));
+    }
+    @Overridepublic void deleteStudent(Long id){
+        store.remove(id);
     
     }
 }  
