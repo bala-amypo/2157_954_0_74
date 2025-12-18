@@ -1,68 +1,26 @@
-package com.example.demo.controller;
+package com.example.sql.Controller;
 
-import java.util.List;
-import java.util.Optional;
+import com.example.sql.Entitydata.User;
+import com.example.sql.Service.UserService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.demo.entity.Student;
-import com.example.demo.service.StudentService;
+import java.util.List;
 
 @RestController
-@RequestMapping("/students") // ✅ base path
-public class StudentController {
+public class UserController {
 
-    private final StudentService studentService;
+    @Autowired
+    UserService service;
 
-    public StudentController(StudentService studentService) {
-        this.studentService = studentService;
+    @PostMapping("/users")
+    public User create(@RequestBody User user) {
+        return service.register(user);
     }
 
-    // CREATE
-    @PostMapping
-    public Student postStudent(@RequestBody Student st) {
-        return studentService.insertStudent(st);
-    }
-
-    // READ ALL
-    @GetMapping
-    public List<Student> getAll() {
-        return studentService.getAllStudents();
-    }
-
-    // READ ONE
-    @GetMapping("/{id}")
-    public Optional<Student> getById(@PathVariable Long id) {
-        return studentService.getOneStudent(id);
-    }
-
-    // UPDATE
-    @PutMapping("/{id}")
-    public String updateStudent(@PathVariable Long id, @RequestBody Student st) {
-        Optional<Student> studentOpt = studentService.getOneStudent(id);
-
-        if (studentOpt.isPresent()) {
-            Student student = studentOpt.get();
-            student.setName(st.getName());
-            student.setEmail(st.getEmail());
-            student.setCgpa(st.getCgpa());
-            student.setDob(st.getDob());
-
-            studentService.insertStudent(student);
-            return "Updated Successfully ✅";
-        }
-        return "Student Not Found ❌";
-    }
-
-    // DELETE
-    @DeleteMapping("/{id}")
-    public String deleteStudent(@PathVariable Long id) {
-        Optional<Student> student = studentService.getOneStudent(id);
-
-        if (student.isPresent()) {
-            studentService.deleteStudent(id);
-            return "Deleted Successfully ✅";
-        }
-        return "Student Not Found ❌";
+    @GetMapping("/users")
+    public List<User> getAll() {
+        return service.getAll();
     }
 }
