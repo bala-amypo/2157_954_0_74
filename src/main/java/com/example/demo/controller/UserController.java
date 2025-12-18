@@ -1,26 +1,27 @@
-package com.example.sql.Controller;
+package com.example.demo.controller;
 
-import com.example.sql.Entitydata.User;
-import com.example.sql.Service.UserService;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import com.example.demo.entity.UserEntity;
+import com.example.demo.service.UserService;
 
 @RestController
+@RequestMapping("/users")
 public class UserController {
 
-    @Autowired
-    UserService service;
+    private final UserService userService;
 
-    @PostMapping("/users")
-    public User create(@RequestBody User user) {
-        return service.register(user);
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
-    @GetMapping("/users")
-    public List<User> getAll() {
-        return service.getAll();
+    @PostMapping("/register")
+    public UserEntity registerUser(@RequestBody UserEntity user) {
+        return userService.registerUser(user);
+    }
+
+    @GetMapping("/{id}")
+    public UserEntity getUser(@PathVariable Long id) {
+        return userService.getUserById(id);
     }
 }

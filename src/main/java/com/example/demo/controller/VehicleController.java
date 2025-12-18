@@ -1,26 +1,30 @@
-package com.example.sql.Controller;
-
-import com.example.sql.Entitydata.Vehicle;
-import com.example.sql.Service.VehicleService;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+package com.example.demo.controller;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.*;
+
+import com.example.demo.entity.VehicleEntity;
+import com.example.demo.service.VehicleService;
+
 @RestController
+@RequestMapping("/vehicles")
 public class VehicleController {
 
-    @Autowired
-    VehicleService service;
+    private final VehicleService vehicleService;
 
-    @PostMapping("/vehicles")
-    public Vehicle create(@RequestBody Vehicle v) {
-        return service.save(v);
+    public VehicleController(VehicleService vehicleService) {
+        this.vehicleService = vehicleService;
     }
 
-    @GetMapping("/vehicles")
-    public List<Vehicle> getAll() {
-        return service.getAll();
+    @PostMapping("/{userId}")
+    public VehicleEntity addVehicle(@PathVariable Long userId,
+                                    @RequestBody VehicleEntity vehicle) {
+        return vehicleService.addVehicle(userId, vehicle);
+    }
+
+    @GetMapping("/user/{userId}")
+    public List<VehicleEntity> getVehiclesByUser(@PathVariable Long userId) {
+        return vehicleService.getVehiclesByUser(userId);
     }
 }
